@@ -1,0 +1,40 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script> <script> 
+function setup() {
+createCanvas(800,600);
+noLoop();
+frameRate(25);
+}
+function draw() { //noprotect
+var blue = 0;
+var red = 0;
+var green = 255;
+var d = 0;
+var dx = 0, dy = 0;
+background(0);
+for(y=0; y<height; y++){
+	for(x=0; x<width; x++) {
+  	dx = x - width/2;
+    dy = y - height/2;
+  	d=sqrt(dx*dx+dy*dy);
+		if(x == 0){
+    	blue = 0;
+      
+    }
+		else if(x == 799){
+    	blue = 255;
+      
+    }
+    else {
+    	blue = (x + y) / (width + height) * 255;
+      green = 255-d;
+      red =  d;
+    }
+    
+    
+		set(x, y, color(green,red,blue));
+	}
+  
+} 
+updatePixels();
+}
+</script>

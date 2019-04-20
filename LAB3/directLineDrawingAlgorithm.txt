@@ -1,0 +1,73 @@
+<style> body { background-color:#ccc; } </style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+<script type="text/javascript">
+function setup() {
+    createCanvas(512,512);
+    background(255);
+    var x0=-1;
+    var y0=-1;
+    var x1=-1;
+    var y1=-1;
+}
+function mousePressed() {
+    x0=Math.round(mouseX);
+    y0=Math.round(mouseY);
+}
+function mouseDragged() {  
+    x1=Math.round(mouseX);
+    y1=Math.round(mouseY);  
+    background(255);
+    noStroke();
+    fill('red');
+    ellipse(x0-3,y0-3,6);
+    fill('green');  
+    ellipse(x1-3,y1-3,6);
+}
+function mouseReleased() {
+  background(255);
+  loadPixels();
+  draw_line();
+  updatePixels();
+}
+function set_pixel(x,y,c) {
+
+  
+	console.log("y0 "+y0);
+  console.log("y1 "+y1);
+  console.log("y "+y);
+    idx=(y*1024+x)*8; // set it appropriately to get line at correct points
+    
+    pixels[idx]=c;
+    pixels[idx+1]=c;
+    pixels[idx+2]=c;
+    pixels[idx+3]=255;
+}
+function draw_line() {
+	dx = x1 - x0;
+  dy = y1 - y0;
+  if(dx==0){ // not a function
+    console.log("000000");
+    for(i=0;i<dy;i++){
+      set_pixel(x0,y0,0);
+      y0 += 1;
+      console.log(y0);
+    }
+  } 
+  else {
+    a = dy/dx;
+    b = y0 - a * x0;
+ 		
+    x=x0;
+    while(x!=x1){
+      y = a * x + b;
+      y = Math.round(y);
+      //dxy = a * x - y + b
+      set_pixel(x,y,0);
+      if(x0<x1)
+      	x++;
+      else
+      	x--;
+    }
+  }
+}
+</script>

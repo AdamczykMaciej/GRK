@@ -1,0 +1,42 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script> <script> 
+function setup() {
+createCanvas(800,600);
+noLoop();
+frameRate(25);
+}
+function draw() { //noprotect
+var flowers = 1;
+background(192, 181, 232);
+for(y=0; y<height; y++){
+	for(x=0; x<width; x++) {
+  	if(y >= 450){
+    	set(x,y,color(33, 117, 60));
+    }  
+    if(y>=200 && y<450 && x>=width/4 && x<=width-width/4)
+    	set(x,y, color(104, 17, 21))
+		} 
+} 
+
+
+// flowers
+for(y=0; y<height; y++){
+	for(x=0; x<width; x++) {
+    if(flowers<=1000){
+        let xFlower = floor(random(0, 800));
+        let yFlower = floor(random(450, 600));
+        let col = color(floor(random(0, 255)));
+         set(xFlower, yFlower, col);
+          flowers++;
+   	}
+   }
+ }
+ 
+ for(y=50,w=50; y<200; y++,w+=2){
+ 		for(x=width/2-w+50; x<width/2+w-50; x++){
+    	set(x,y, color(253, 108, 104));
+    }
+ }
+ 
+ updatePixels();
+ }
+</script>
